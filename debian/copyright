@@ -1,23 +1,28 @@
-Format: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=174
-Upstream-Name: mp3splt
-Source: http://launchpad.net/oggfix/
+This package was debianized by Ryan Niebur <ryanryan52@gmail.com> on
+Sun, 15 Mar 2009 10:26:56 -0700.
 
-Files: *
-Copyright: 2005-2011 Munteanu Alexandru - <io_alex_2002@yahoo.fr>, 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
-License: GPL-2+
+It was downloaded from <http://mp3splt.sourceforge.net/>
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+Upstream Author:
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    Matteo Trotta
+    Alexandru Munteanu
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+Copyright:
 
-Full text of the license is in /usr/share/common-licenses/GPL
+    Copyright (C) 2002-2005 Matteo Trotta
+    Copyright (C) 2005-2009 Alexandru Ionut Munteanu
+
+License:
+
+    You can redistribute this software and/or modify it under the
+    terms of the GNU General Public License as published
+    by the Free Software Foundation; either version 2 of the License,
+    or (at your option) any later   version.
+
+    On Debian systems you can find the full text of the GNU General
+    Public License version 2 in '/usr/share/common-licenses/GPL-2'.
+
+The Debian packaging is copyright 2009, Ryan Niebur <ryanryan52@gmail.com> and
+is licensed under the same license as mp3splt itself.
+
