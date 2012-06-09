@@ -1,28 +1,20 @@
-This package was debianized by Ryan Niebur <ryanryan52@gmail.com> on
-Sun, 15 Mar 2009 10:26:56 -0700.
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: http://mp3splt.sourceforge.net/
 
-It was downloaded from <http://mp3splt.sourceforge.net/>
+Files: *
+Copyright: Copyright (C) 2002-2005 Matteo Trotta
+ Copyright (C) 2005-2012 Alexandru Ionut Munteanu
+License: GPL-2+
 
-Upstream Author:
+Files: debian/*
+Copyright: copyright 2009-2012, Ryan Niebur <ryanryan52@gmail.com>
+License: GPL-2+
 
-    Matteo Trotta
-    Alexandru Munteanu
-
-Copyright:
-
-    Copyright (C) 2002-2005 Matteo Trotta
-    Copyright (C) 2005-2009 Alexandru Ionut Munteanu
-
-License:
-
+License: GPL-2+
     You can redistribute this software and/or modify it under the
     terms of the GNU General Public License as published
     by the Free Software Foundation; either version 2 of the License,
     or (at your option) any later   version.
-
+    .
     On Debian systems you can find the full text of the GNU General
     Public License version 2 in '/usr/share/common-licenses/GPL-2'.
-
-The Debian packaging is copyright 2009, Ryan Niebur <ryanryan52@gmail.com> and
-is licensed under the same license as mp3splt itself.
-

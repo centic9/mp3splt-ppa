@@ -1,0 +1,28 @@
+Description: Fix long lines in the man page
+Author: Ryan Niebur <ryan@debian.org>
+Forwarded: no
+
+Index: mp3splt/doc/mp3splt.1
+===================================================================
+--- mp3splt.orig/doc/mp3splt.1	2012-06-02 23:57:16.000000000 -0700
++++ mp3splt/doc/mp3splt.1	2012-06-03 23:20:21.000000000 -0700
+@@ -259,7 +259,8 @@
+ 
+ Examples:
+ 
+-  query[search=cddb_cgi://tracktype.org/~cddb/cddb.cgi:80,get=cddb_cgi://tracktype.org/~cddb/cddb.cgi:80]
++  query[search=cddb_cgi://tracktype.org/~cddb/cddb.cgi:80,
++        get=cddb_cgi://tracktype.org/~cddb/cddb.cgi:80]
+ .br
+   query[get=cddb_protocol://freedb.org:8880]
+ .br
+@@ -536,7 +537,8 @@
+ Example: if the input filename is \fBartist1__album2__title3__comment4__2__2004__Samba.ogg\fP, 
+ .br
+ the following regular expression
+-\fB(?<artist>.*?)__(?<album>.*?)__(?<title>.*?)__(?<comment>.*?)__(?<tracknum>.*?)__(?<year>.*?)__(?<genre>.*)\fP extracts the tags:
++\fB(?<artist>.*?)__(?<album>.*?)__(?<title>.*?)__(?<comment>.*?)\fP
++ \fB__(?<tracknum>.*?)__(?<year>.*?)__(?<genre>.*)\fP extracts the tags:
+   (?<artist>): artist1
+   (?<album>): album2
+   (?<title>): title3

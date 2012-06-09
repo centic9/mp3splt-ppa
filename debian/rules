@@ -1,9 +1,7 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-%:
-	dh $@
+include /usr/share/libmp3splt-dev/mp3splt.rules
 
-override_dh_auto_configure:
-	dh_auto_configure -- --disable-mp3splttest --enable-oggsplt_symlink
-
+EXTRA_CONFIGURE_OPTS=--enable-oggsplt_symlink
+SHORT_INTERFACE="command line"

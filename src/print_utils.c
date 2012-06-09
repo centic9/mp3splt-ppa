@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2011 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -251,7 +251,7 @@ void show_small_help_exit(main_data *data)
   print_message(_(" -m + M3U_FILE: Appends to the specified m3u file the split filenames.\n"
         " -f   Frame mode (mp3 only): process all frames. For higher precision and VBR.\n"
         " -a   Auto-Adjust splitpoints with silence detection. (Use -p for arguments)"));
-  print_message(_(" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin): user arguments for -s and -a.\n"
+  print_message(_(" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin, shots): user arguments for -s and -a.\n"
         " -o + FORMAT: output filename pattern. Can contain those variables:\n"
         "      @a: artist tag, @p: performer tag (might not exists), @b: album tag\n"
         "      @t: title tag, @n: track number identifier, @N: track tag number\n"
