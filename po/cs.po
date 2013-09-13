@@ -3,87 +3,94 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-#   <pavelfric@seznam.cz>, 2011.
+# fri <pavelfric@seznam.cz>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: mp3splt-gtk\n"
-"Report-Msgid-Bugs-To: io_fx@yahoo.fr\n"
-"POT-Creation-Date: 2012-05-13 00:32+0200\n"
-"PO-Revision-Date: 2011-09-11 11:11+0000\n"
-"Last-Translator: fri <pavelfric@seznam.cz>\n"
+"Report-Msgid-Bugs-To: m@ioalex.net\n"
+"POT-Creation-Date: 2013-07-20 09:11+0200\n"
+"PO-Revision-Date: 2013-04-29 08:36+0000\n"
+"Last-Translator: Peter Pall <gunter@peterpall.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: src/mp3splt.c:257 src/utils.c:36 src/utils.c:52
+#: src/mp3splt.c:310 src/print_utils.c:55 src/freedb.c:434 src/utils.c:36
+#: src/utils.c:52
 msgid "cannot allocate memory !"
 msgstr "Nelze přidělit paměť!"
 
-#: src/mp3splt.c:278
+#: src/mp3splt.c:331
 msgid ""
 "bad overlap time expression.\n"
 "\tMust be min.sec[.0-99] or EOF-min.sec[.0-99], read man page for details."
 msgstr ""
 
-#: src/mp3splt.c:296
+#: src/mp3splt.c:352
 msgid ""
 "bad time expression for the time split.\n"
 "\tMust be min.sec[.0-99] or EOF-min.sec[.0-99], read man page for details."
 msgstr ""
 
-#: src/mp3splt.c:359
+#: src/mp3splt.c:361
+msgid ""
+"bad minimum time expression.\n"
+"\tMust be min.sec[.0-99] or EOF-min.sec[.0-99], read man page for details."
+msgstr ""
+
+#: src/mp3splt.c:429
 msgid "read man page for documentation or type 'mp3splt -h'."
 msgstr ""
 
-#: src/mp3splt.c:423
+#: src/mp3splt.c:495
 msgid "bad argument for -p option. No valid value was recognized !"
 msgstr ""
 
-#: src/mp3splt.c:557
+#: src/mp3splt.c:642
 msgid "no input filename(s)."
 msgstr ""
 
-#: src/mp3splt.c:570
+#: src/mp3splt.c:655
 msgid "multiple splitpoints with stdout !"
 msgstr ""
 
-#: src/mp3splt.c:574
+#: src/mp3splt.c:659
 msgid "using time mode with stdout !"
 msgstr ""
 
-#: src/mp3splt.c:615
+#: src/mp3splt.c:700
 #, c-format
 msgid " Pretending to split file '%s' ...\n"
 msgstr ""
 
-#: src/mp3splt.c:619
+#: src/mp3splt.c:704
 #, c-format
 msgid " Processing file '%s' ...\n"
 msgstr ""
 
-#: src/mp3splt.c:626 src/options_checker.c:49
+#: src/mp3splt.c:710
 msgid ""
 "cannot use -k option (or STDIN) with one of the following options: -S -s -r -"
-"w -l -e -i -a -p"
+"w -l -e -i -a -p -K"
 msgstr ""
 
-#: src/mp3splt.c:682
+#: src/mp3splt.c:786
 msgid "freedb query format ambigous !"
 msgstr ""
 
-#: src/mp3splt.c:726
+#: src/mp3splt.c:832
 msgid "tags format ambiguous !"
 msgstr ""
 
-#: src/mp3splt.c:758
+#: src/mp3splt.c:864
 #, c-format
 msgid " Average silence level: %.2f dB"
 msgstr ""
 
-#: src/mp3splt.c:775
+#: src/mp3splt.c:880
 msgid ""
 "\n"
 " +-----------------------------------------------------------------------------"
@@ -109,209 +116,6 @@ msgid ""
 "+\n"
 msgstr ""
 
-#: src/freedb.c:58
-#, c-format
-msgid " Freedb search type: %s , Site: %s , Port: %d\n"
-msgstr ""
-
-#: src/freedb.c:61
-#, c-format
-msgid " Freedb get type: %s , Site: %s , Port: %d\n"
-msgstr ""
-
-#: src/freedb.c:71
-msgid "CDDB QUERY. Insert album and artist informations to find cd."
-msgstr ""
-
-#: src/freedb.c:79
-msgid ""
-"\n"
-"Please search something ..."
-msgstr ""
-
-#: src/freedb.c:85
-#, c-format
-msgid "\r Search: ["
-msgstr ""
-
-#: src/freedb.c:102
-#, c-format
-msgid ""
-"\n"
-"  Search string: %s\n"
-msgstr ""
-
-#: src/freedb.c:103
-#, c-format
-msgid ""
-"\n"
-"Searching from %s on port %d using %s ...\n"
-msgstr ""
-
-#: src/freedb.c:116
-msgid "No results found"
-msgstr ""
-
-#: src/freedb.c:126
-msgid "List of found cd:"
-msgstr ""
-
-#: src/freedb.c:140
-#, c-format
-msgid "Revision: %d\n"
-msgstr ""
-
-#: src/freedb.c:147
-#, c-format
-msgid "-- 'q' to select cd, Enter for more:"
-msgstr ""
-
-#: src/freedb.c:165
-#, c-format
-msgid "-- 'q' to select cd, Enter for more: "
-msgstr ""
-
-#: src/freedb.c:192
-#, c-format
-msgid "Select cd #: "
-msgstr ""
-
-#: src/freedb.c:207
-#, c-format
-msgid "Please "
-msgstr ""
-
-#: src/freedb.c:232
-#, c-format
-msgid ""
-"\n"
-"Getting file from %s on port %d using %s ...\n"
-msgstr ""
-
-#: src/options_checker.c:66
-msgid "the -w option can only be used with -m, -d, -q and -Q"
-msgstr ""
-
-#: src/options_checker.c:82
-msgid "the -l option can only be used with -q"
-msgstr ""
-
-#: src/options_checker.c:96
-msgid "the -e option can only be used with -m, -f, -o, -d, -q, -Q"
-msgstr ""
-
-#: src/options_checker.c:111
-msgid "the -c option cannot be used with -t, -g, -G, -s, -r, -A, -i or -S"
-msgstr ""
-
-#: src/options_checker.c:119
-msgid "the -A option cannot be used with -t, -s, -r, -i or -S"
-msgstr ""
-
-#: src/options_checker.c:127
-msgid "the -t option cannot be used with -s, -r, -i or -S"
-msgstr ""
-
-#: src/options_checker.c:135
-msgid "-s option cannot be used with -a, -r, -i or -S"
-msgstr ""
-
-#: src/options_checker.c:143
-msgid "-a option cannot be used with -i"
-msgstr ""
-
-#: src/options_checker.c:155
-msgid "the -p option cannot be used without -a, -s, -r  or -i"
-msgstr ""
-
-#: src/options_checker.c:163
-msgid "the -o option cannot be used with -i"
-msgstr ""
-
-#: src/options_checker.c:169
-msgid "cannot use '-o -' (STDOUT) with -m or -d"
-msgstr ""
-
-#: src/options_checker.c:178
-msgid "the -g option cannot be used with -n, -i or -G"
-msgstr ""
-
-#: src/options_checker.c:186
-msgid "the -d option cannot be used with -i"
-msgstr ""
-
-#: src/options_checker.c:194
-msgid "the -n option cannot be used with -i or -T"
-msgstr ""
-
-#: src/options_checker.c:202
-msgid "the -m option cannot be used with -i"
-msgstr ""
-
-#: src/options_checker.c:220
-msgid "the -Q option cannot be used with STDOUT output ('-o -')"
-msgstr ""
-
-#: src/options_checker.c:228
-msgid "the -Q option cannot be used with interactive freedb query ('-c query')"
-msgstr ""
-
-#: src/options_checker.c:238
-msgid "the -N option must be used with silence detection (-s option)"
-msgstr ""
-
-#: src/options_checker.c:248
-msgid "the -O option cannot be used with -w, -e, -l or -i"
-msgstr ""
-
-#: src/options_parsers.c:45
-msgid "bad gap argument. It will be ignored !"
-msgstr ""
-
-#: src/options_parsers.c:60
-msgid "bad shots argument. It will be ignored !"
-msgstr ""
-
-#: src/options_parsers.c:75
-msgid "bad threshold argument. It will be ignored !"
-msgstr ""
-
-#: src/options_parsers.c:90
-msgid "bad tracknumber argument. It will be ignored !"
-msgstr ""
-
-#: src/options_parsers.c:114
-msgid "bad offset argument. It will be ignored!"
-msgstr ""
-
-#: src/options_parsers.c:129
-msgid "bad minimum track length argument. It will be ignored !"
-msgstr ""
-
-#: src/options_parsers.c:148
-msgid "bad minimum silence length argument. It will be ignored !"
-msgstr ""
-
-#: src/options_parsers.c:171
-msgid "no regular expression found as argument."
-msgstr ""
-
-#: src/options_parsers.c:347
-msgid "found non digits characters in port ! (switched to default)"
-msgstr ""
-
-#: src/options_parsers.c:372
-msgid "unknown search type ! (switched to default)"
-msgstr ""
-
-#: src/options_parsers.c:388
-msgid "freedb web search not implemented yet ! (switched to default)"
-msgstr ""
-
-#: src/options_parsers.c:394
-msgid "unknown get type ! (switched to default)"
-msgstr ""
-
 #: src/print_utils.c:39
 #, c-format
 msgid " Warning: %s\n"
@@ -322,53 +126,53 @@ msgstr " Varování: %s\n"
 msgid " Error: %s\n"
 msgstr " Chyba: %s\n"
 
-#: src/print_utils.c:75
+#: src/print_utils.c:127
 #, c-format
 msgid "   File \"%s\" created%s\n"
 msgstr ""
 
-#: src/print_utils.c:87
+#: src/print_utils.c:142
 #, c-format
 msgid " preparing \"%s\" (%d of %d)"
 msgstr ""
 
-#: src/print_utils.c:94
+#: src/print_utils.c:149
 #, c-format
 msgid " creating \"%s\" (%d of %d)"
 msgstr ""
 
-#: src/print_utils.c:101
+#: src/print_utils.c:156
 #, c-format
 msgid " searching for sync errors..."
 msgstr ""
 
-#: src/print_utils.c:107
+#: src/print_utils.c:165
 #, c-format
 msgid "S: %02d, Level: %.2f dB; scanning for silence..."
 msgstr ""
 
-#: src/print_utils.c:112
+#: src/print_utils.c:170
 #, c-format
 msgid "Level: %.2f dB; scanning for silence..."
 msgstr ""
 
-#: src/print_utils.c:155
+#: src/print_utils.c:202
 msgid "using"
 msgstr ""
 
-#: src/print_utils.c:167
+#: src/print_utils.c:215
 #, c-format
 msgid ""
 "THIS SOFTWARE COMES WITH ABSOLUTELY NO WARRANTY! USE AT YOUR OWN RISK!\n"
 msgstr ""
 
-#: src/print_utils.c:216
+#: src/print_utils.c:264
 msgid ""
 "\n"
 "All files have been split correctly. Visit http://mp3wrap.sourceforge.net!"
 msgstr ""
 
-#: src/print_utils.c:225
+#: src/print_utils.c:273
 msgid ""
 "\n"
 "USAGE:\n"
@@ -378,7 +182,7 @@ msgid ""
 "                   or EOF-min.sec[.0-99] (or EOF for End Of File). "
 msgstr ""
 
-#: src/print_utils.c:230
+#: src/print_utils.c:278
 msgid ""
 "\n"
 "OPTIONS (split mode options)\n"
@@ -390,7 +194,7 @@ msgid ""
 "      Use -a to auto-adjust splitpoints."
 msgstr ""
 
-#: src/print_utils.c:235
+#: src/print_utils.c:283
 msgid ""
 " -s   Silence detection: automatically find splitpoint. (Use -p for "
 "arguments)\n"
@@ -399,20 +203,20 @@ msgid ""
 " -e   Error mode: split mp3 with sync error detection. (For concatenated mp3)"
 msgstr ""
 
-#: src/print_utils.c:239
+#: src/print_utils.c:287
 msgid " -r   Trim using silence detection (Use -p for arguments)"
 msgstr ""
 
-#: src/print_utils.c:241
+#: src/print_utils.c:289
 msgid ""
 " -A + AUDACITY_FILE: split with splitpoints from the audacity labels file"
 msgstr ""
 
-#: src/print_utils.c:242
+#: src/print_utils.c:290
 msgid " -S + SPLIT_NUMBER: split in SPLIT_NUMBER equal time files"
 msgstr ""
 
-#: src/print_utils.c:247
+#: src/print_utils.c:295
 msgid ""
 "\n"
 "(other options)\n"
@@ -422,7 +226,7 @@ msgid ""
 "      (default is to set the same version as the file to split)"
 msgstr ""
 
-#: src/print_utils.c:251
+#: src/print_utils.c:299
 msgid ""
 " -m + M3U_FILE: Appends to the specified m3u file the split filenames.\n"
 " -f   Frame mode (mp3 only): process all frames. For higher precision and "
@@ -430,10 +234,10 @@ msgid ""
 " -a   Auto-Adjust splitpoints with silence detection. (Use -p for arguments)"
 msgstr ""
 
-#: src/print_utils.c:254
+#: src/print_utils.c:302
 msgid ""
-" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin, shots): user "
-"arguments for -s and -a.\n"
+" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin, shots, trackjoin): "
+"user arguments for -s, -a, -t.\n"
 " -o + FORMAT: output filename pattern. Can contain those variables:\n"
 "      @a: artist tag, @p: performer tag (might not exists), @b: album tag\n"
 "      @t: title tag, @n: track number identifier, @N: track tag number\n"
@@ -442,7 +246,7 @@ msgid ""
 "      @f: original filename, @g: genre"
 msgstr ""
 
-#: src/print_utils.c:260
+#: src/print_utils.c:309
 msgid ""
 " -g + TAGS: custom tags for the split files.\n"
 "      TAGS can contain those variables: \n"
@@ -452,7 +256,7 @@ msgid ""
 "       (% means that we set the tags for all remaining files)"
 msgstr ""
 
-#: src/print_utils.c:266
+#: src/print_utils.c:315
 msgid ""
 " -G + regex=REGEX: set tags from input filename. REGEX defines how to "
 "extract\n"
@@ -461,7 +265,7 @@ msgid ""
 "<comment>), (?<genre>)"
 msgstr ""
 
-#: src/print_utils.c:270
+#: src/print_utils.c:319
 msgid ""
 " -d + DIRNAME: to put all output files in the directory DIRNAME.\n"
 " -k   Consider input not seekable (slower). Default when input is STDIN "
@@ -469,7 +273,7 @@ msgid ""
 " -O + TIME: Overlap split files with TIME (slower)."
 msgstr ""
 
-#: src/print_utils.c:273
+#: src/print_utils.c:322
 msgid ""
 " -n   No Tag: does not write ID3v1 or vorbis comment. If you need clean "
 "files.\n"
@@ -479,17 +283,17 @@ msgid ""
 " -N   Don't create the 'mp3splt.log' log file when using '-s'."
 msgstr ""
 
-#: src/print_utils.c:277
+#: src/print_utils.c:326
 msgid ""
 " -P   Pretend to split: simulation of the process, without creating any\n"
 "      files or directories"
 msgstr ""
 
-#: src/print_utils.c:279
+#: src/print_utils.c:328
 msgid " -E + CUE_FILE: export splitpoints to CUE file (use with -P if needed)"
 msgstr ""
 
-#: src/print_utils.c:280
+#: src/print_utils.c:329
 msgid ""
 " -q   Quiet mode: try not to prompt (if possible) and print less messages.\n"
 " -Q   Very quiet mode: don't print anything to stdout and no progress bar\n"
@@ -497,6 +301,217 @@ msgid ""
 " -D   Debug mode: used to debug the program.\n"
 "\n"
 "      Please read man page for complete documentation.\n"
+msgstr ""
+
+#: src/options_checker.c:49
+msgid ""
+"cannot use -k option (or STDIN) with one of the following options: -S -s -r -"
+"w -l -e -i -a -p -F"
+msgstr ""
+
+#: src/options_checker.c:67
+msgid "the -w option can only be used with -m, -d, -q and -Q"
+msgstr ""
+
+#: src/options_checker.c:84
+msgid "the -l option can only be used with -q"
+msgstr ""
+
+#: src/options_checker.c:98
+msgid "the -e option can only be used with -m, -f, -o, -d, -q, -Q"
+msgstr ""
+
+#: src/options_checker.c:114
+msgid "the -c option cannot be used with -t, -g, -G, -s, -r, -A, -i, -S or -F"
+msgstr ""
+
+#: src/options_checker.c:124
+msgid "the -A option cannot be used with -t, -s, -r, -i, -S or -F"
+msgstr ""
+
+#: src/options_checker.c:134
+msgid "the -t option cannot be used with -s, -r, -i, -S or -F"
+msgstr ""
+
+#: src/options_checker.c:143
+msgid "-s option cannot be used with -a, -r, -i or -S"
+msgstr ""
+
+#: src/options_checker.c:151
+msgid "-a option cannot be used with -i"
+msgstr ""
+
+#: src/options_checker.c:163
+msgid "the -p option cannot be used without -a, -s, -r  or -i"
+msgstr ""
+
+#: src/options_checker.c:171
+msgid "the -o option cannot be used with -i"
+msgstr ""
+
+#: src/options_checker.c:177
+msgid "cannot use '-o -' (STDOUT) with -m or -d"
+msgstr ""
+
+#: src/options_checker.c:186
+msgid "the -g option cannot be used with -n, -i or -G"
+msgstr ""
+
+#: src/options_checker.c:194
+msgid "the -d option cannot be used with -i"
+msgstr ""
+
+#: src/options_checker.c:202
+msgid "the -n option cannot be used with -i or -T"
+msgstr ""
+
+#: src/options_checker.c:210
+msgid "the -m option cannot be used with -i"
+msgstr ""
+
+#: src/options_checker.c:228
+msgid "the -Q option cannot be used with STDOUT output ('-o -')"
+msgstr ""
+
+#: src/options_checker.c:236
+msgid "the -Q option cannot be used with interactive freedb query ('-c query')"
+msgstr ""
+
+#: src/options_checker.c:246
+msgid "the -N option must be used with silence detection (-s option)"
+msgstr ""
+
+#: src/options_checker.c:255
+msgid "the -O option cannot be used with -w, -e, -l or -i"
+msgstr ""
+
+#: src/options_checker.c:281
+msgid "the -F option cannot be used without -s"
+msgstr ""
+
+#: src/options_checker.c:289
+msgid "the -K option cannot be used without -c"
+msgstr ""
+
+#: src/freedb.c:118
+#, c-format
+msgid " Freedb search type: %s , Site: %s , Port: %d\n"
+msgstr ""
+
+#: src/freedb.c:121
+#, c-format
+msgid " Freedb get type: %s , Site: %s , Port: %d\n"
+msgstr ""
+
+#: src/freedb.c:130
+msgid "CDDB QUERY. Insert album and artist informations to find cd."
+msgstr ""
+
+#: src/freedb.c:136
+msgid ""
+"\n"
+"Please search something ..."
+msgstr ""
+
+#: src/freedb.c:142
+#, c-format
+msgid "\r Search: ["
+msgstr ""
+
+#: src/freedb.c:158
+#, c-format
+msgid ""
+"\n"
+"  Search string: %s\n"
+msgstr ""
+
+#: src/freedb.c:159
+#, c-format
+msgid ""
+"\n"
+"Searching from %s on port %d using %s ...\n"
+msgstr ""
+
+#: src/freedb.c:172
+msgid "No results found"
+msgstr ""
+
+#: src/freedb.c:182
+msgid "List of found cd:"
+msgstr ""
+
+#: src/freedb.c:201
+#, c-format
+msgid "Revision: %d\n"
+msgstr ""
+
+#: src/freedb.c:208
+#, c-format
+msgid "-- 'q' to select cd, Enter for more:"
+msgstr ""
+
+#: src/freedb.c:226
+#, c-format
+msgid "-- 'q' to select cd, Enter for more: "
+msgstr ""
+
+#: src/freedb.c:253
+#, c-format
+msgid "Select cd #: "
+msgstr ""
+
+#: src/freedb.c:268
+#, c-format
+msgid "Please "
+msgstr ""
+
+#: src/freedb.c:288
+#, c-format
+msgid ""
+"\n"
+"Getting file from %s on port %d using %s ...\n"
+msgstr ""
+
+#: src/freedb.c:426
+msgid "the configuration file is malformed !"
+msgstr ""
+
+#: src/freedb.c:462
+msgid "can't open the configuration file !"
+msgstr ""
+
+#: src/freedb.c:470
+#, c-format
+msgid "Will you use a proxy ? (y/n): "
+msgstr ""
+
+#: src/freedb.c:477
+#, c-format
+msgid "Proxy Address: "
+msgstr ""
+
+#: src/freedb.c:481
+#, c-format
+msgid "Proxy Port: "
+msgstr ""
+
+#: src/freedb.c:485
+#, c-format
+msgid "Need authentication ? (y/n): "
+msgstr ""
+
+#: src/freedb.c:493
+#, c-format
+msgid "Would you like to save the password (insecure) ? (y/n): "
+msgstr ""
+
+#: src/freedb.c:522
+#, c-format
+msgid "Username: "
+msgstr ""
+
+#: src/freedb.c:526
+msgid "Password: "
 msgstr ""
 
 #: src/utils.c:127
@@ -521,6 +536,62 @@ msgstr ""
 msgid ""
 "\n"
 "-- 's' to split, 'c' to cancel:"
+msgstr ""
+
+#: src/options_parsers.c:46
+msgid "bad gap argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:61
+msgid "bad shots argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:76
+msgid "bad trackjoin argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:91
+msgid "bad threshold argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:106
+msgid "bad tracknumber argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:119
+msgid "Bad values for the rm argument. rm parameter will be ignored!"
+msgstr ""
+
+#: src/options_parsers.c:141
+msgid "bad offset argument. It will be ignored!"
+msgstr ""
+
+#: src/options_parsers.c:156
+msgid "bad minimum track length argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:175
+msgid "bad minimum silence length argument. It will be ignored !"
+msgstr ""
+
+#: src/options_parsers.c:198
+msgid "no regular expression found as argument."
+msgstr ""
+
+#: src/options_parsers.c:374
+msgid "found non digits characters in port ! (switched to default)"
+msgstr ""
+
+#: src/options_parsers.c:399
+msgid "unknown search type ! (switched to default)"
+msgstr ""
+
+#: src/options_parsers.c:415
+msgid "freedb web search not implemented yet ! (switched to default)"
+msgstr ""
+
+#: src/options_parsers.c:421
+msgid "unknown get type ! (switched to default)"
 msgstr ""
 
 #: src/windows_utils.c:49

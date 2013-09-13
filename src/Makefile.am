@@ -12,8 +12,8 @@ mp3splt_SOURCES = \
 	common.h \
 	mp3splt.c
 
-INCLUDES = @MP3SPLT_CFLAGS@
-mp3splt_LDADD = @MP3SPLT_LIBS@ @LIBINTL@
+INCLUDES = @LIBMP3SPLT_CFLAGS@
+mp3splt_LDADD = @LIBMP3SPLT_LIBS@ @LIBINTL@
 
 if WIN32
   mp3splt_LDADD += -lwsock32 -lshlwapi 
@@ -24,13 +24,22 @@ localedir = $(datadir)/locale
 DEFS = -DLOCALEDIR=\"$(localedir)\" @DEFS@
 
 install-exec-hook:
-if DO_SYMLINK
+if DO_OGG_SYMLINK
 	-cd $(DESTDIR)/$(bindir) && $(LN_S) mp3splt oggsplt
 endif
+if DO_FLAC_SYMLINK
+	-cd $(DESTDIR)/$(bindir) && $(LN_S) mp3splt flacsplt
+endif
+
 uninstall-hook:
-if DO_SYMLINK
+if DO_OGG_SYMLINK
 	if [ -L $(DESTDIR)/$(bindir)/oggsplt ];then \
 	  echo "The $(DESTDIR)/$(bindir)/oggsplt symlink still exists. You may want to remove it."; \
+	fi
+endif
+if DO_FLAC_SYMLINK
+	if [ -L $(DESTDIR)/$(bindir)/flacsplt ];then \
+	  echo "The $(DESTDIR)/$(bindir)/flacsplt symlink still exists. You may want to remove it."; \
 	fi
 endif
 

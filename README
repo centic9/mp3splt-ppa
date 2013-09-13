@@ -1,7 +1,7 @@
-	mp3splt version 2.4.2
+	mp3splt version 2.6
 
 	     Copyright (C) 2002-2005 Matteo Trotta
-	     Copyright (C) 2005-2012 Alexandru Ionut Munteanu
+	     Copyright (C) 2005-2013 Alexandru Ionut Munteanu
 
    Visit http://mp3splt.sourceforge.net for latest realease!
 
@@ -26,7 +26,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 See COPYING for more details.
 
@@ -42,4 +42,4 @@ advices and new functions to add to this program.
 Enjoy!
 
 Matteo Trotta - <mtrotta@users.sourceforge.net>
-Alexandru Ionut Munteanu - <io_fx@yahoo.fr>
+Alexandru Ionut Munteanu - <m@ioalex.net>

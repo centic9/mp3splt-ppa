@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,10 +18,12 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "data_manager.h"
 #include "utils.h"
@@ -54,6 +56,8 @@ main_data *create_main_struct(int argc, char **orig_argv)
   data->argv = orig_argv;
 #endif
 
+  data->printed_value_length = 0;
+
   return data;
 }
 
@@ -65,7 +69,7 @@ void free_main_struct(main_data **d)
     if (data)
     {
       //try to stop the split
-      mp3splt_stop_split(data->state, NULL);
+      mp3splt_stop_split(data->state);
       //free options
       free_options(&data->opt);
 
@@ -113,8 +117,7 @@ void free_main_struct(main_data **d)
       }
 #endif 
 
-      //free left variables in the state
-      mp3splt_free_state(data->state, NULL);
+      mp3splt_free_state(data->state);
       data->state = NULL;
 
       free(data);

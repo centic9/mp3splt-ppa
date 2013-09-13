@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #include "common.h"
@@ -27,7 +27,8 @@
 #include "utils.h"
 
 int parse_silence_options(char *arg, float *th, int *gap,
-    int *nt, float *off, int *rm, float *min, float *min_track_length, int *shots)
+    int *nt, float *off, int *rm, float *min, float *min_track_length, int *shots,
+    float *min_track_join, float *keep_silence_left, float *keep_silence_right)
 {
   char *ptr = NULL;
   int found = 0;
@@ -62,6 +63,21 @@ int parse_silence_options(char *arg, float *th, int *gap,
     }
   }
 
+  if ((min_track_join != NULL) && ((ptr = strstr(arg, "trackjoin"))!=NULL))
+  {
+    if ((ptr=strchr(ptr, '='))!=NULL)
+    {
+      if (sscanf(ptr+1, "%f", min_track_join)==1)
+      {
+        found++;
+      }
+      else 
+      {
+        print_warning(_("bad trackjoin argument. It will be ignored !"));
+      }
+    }
+  }
+
   if ((th!=NULL) && ((ptr=strstr(arg, "th"))!=NULL))
   {
     if ((ptr=strchr(ptr, '='))!=NULL)
@@ -92,9 +108,20 @@ int parse_silence_options(char *arg, float *th, int *gap,
     }
   }
 
-  if (rm!=NULL)
+  if (rm != NULL)
   {
-    if ((ptr=strstr(arg, "rm"))!=NULL)
+    if ((ptr = strstr(arg, "rm=")) != NULL)
+    {
+      if (sscanf(ptr+3, "%f_%f", keep_silence_left, keep_silence_right) != 2)
+      {
+        *keep_silence_left = -200;
+        *keep_silence_right = -200;
+        print_warning(_("Bad values for the rm argument. rm parameter will be ignored!"));
+      }
+      found++;
+      *rm = 1;
+    }
+    else if ((ptr = strstr(arg, "rm")) != NULL)
     {
       found++;
       *rm = 1;

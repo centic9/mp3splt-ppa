@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #ifndef PRINT_UTILS_H
@@ -30,9 +30,9 @@
 void print_message(const char *m);
 void print_warning(const char *w);
 void print_error(const char *e);
-void put_library_message(const char *message, splt_message_type mess_type);
-void put_split_file(const char *file, int progress_data);
-void put_progress_bar(splt_progress *p_bar);
+void put_library_message(const char *message, splt_message_type mess_type, void *data);
+void put_split_file(const char *file, void *data);
+void put_progress_bar(splt_progress *p_bar, void *data);
 void print_version(FILE *std);
 void print_authors(FILE *std);
 void print_no_warranty(FILE *std);
