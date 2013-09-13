@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 
@@ -27,7 +27,8 @@
 #include "options_manager.h"
 
 int parse_silence_options(char *arg, float *th, int *gap,
-    int *nt, float *off, int *rm, float *min, float *min_track_length, int *shots);
+    int *nt, float *off, int *rm, float *min, float *min_track_length, int *shots,
+    float *min_track_join, float *keep_silence_left, float *keep_silence_right);
 int parse_query_arg(options *opt, const char *query);
 regex_options *parse_tags_from_fname_regex_options(const char *parameters, int *error);
 

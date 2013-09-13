@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2010 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2010 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #ifndef COMMON_H
@@ -43,7 +43,7 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #else
-#define VERSION "2.4.2"
+#define VERSION "2.6"
 #define PACKAGE_NAME "mp3splt"
 #endif
 
@@ -58,11 +58,11 @@
 #  define _(STR) ((const char *)STR)
 #endif
 
-#define MP3SPLT_DATE "13/05/12"
+#define MP3SPLT_DATE "20/07/13"
 #define MP3SPLT_AUTHOR1 "Matteo Trotta"
 #define MP3SPLT_AUTHOR2 "Alexandru Munteanu"
 #define MP3SPLT_EMAIL1 "<mtrotta AT users.sourceforge.net>"
-#define MP3SPLT_EMAIL2 "<io_fx AT yahoo.fr>"
+#define MP3SPLT_EMAIL2 "<m AT ioalex.net>"
 #define MP3SPLT_CDDBFILE "query.cddb"
 
 #define COMMON_H

@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #include "common.h"
@@ -45,8 +45,15 @@ splt_state *state;
 
 void sigint_handler(int sig)
 {
-  mp3splt_stop_split(state, NULL);
+  mp3splt_stop_split(state);
   exit(1);
+}
+
+static int is_stdin(const char *current_filename)
+{
+  return strcmp(current_filename, "-") == 0 ||
+    strcmp(current_filename, "o-") == 0 ||
+    strcmp(current_filename, "f-") == 0;
 }
 
 int main(int argc, char **orig_argv)
@@ -66,9 +73,7 @@ int main(int argc, char **orig_argv)
 
   main_data *data = create_main_struct(argc, orig_argv);
 
-#ifdef ENABLE_NLS
-
-# ifdef __WIN32__
+#ifdef __WIN32__
   char mp3splt_uninstall_file[2048] = { '\0' };
   DWORD dwType, dwSize = sizeof(mp3splt_uninstall_file) - 1;
   SHGetValue(HKEY_LOCAL_MACHINE,
@@ -98,13 +103,22 @@ int main(int argc, char **orig_argv)
     }
   }
 
+# ifdef ENABLE_NLS
   bindtextdomain(MP3SPLT_GETTEXT_DOMAIN, "translations");
-  bindtextdomain(MP3SPLT_LIB_GETTEXT_DOMAIN, "translations");
-
+  bindtextdomain(LIBMP3SPLT_WITH_SONAME, "translations");
 # else
+  #error No NLS detected
+# endif
+
+#else
+
+# ifdef ENABLE_NLS
   bindtextdomain(MP3SPLT_GETTEXT_DOMAIN, LOCALEDIR);
 # endif
 
+#endif
+
+#ifdef ENABLE_NLS
   bind_textdomain_codeset(MP3SPLT_GETTEXT_DOMAIN, "UTF-8");
 #endif
 
@@ -120,10 +134,10 @@ int main(int argc, char **orig_argv)
   signal(SIGINT, sigint_handler);
 
   //callback for the library messages
-  mp3splt_set_message_function(state, put_library_message);
+  mp3splt_set_message_function(state, put_library_message, data);
   mp3splt_set_silence_level_function(state, get_silence_level, data->sl);
   //callback for the split files
-  mp3splt_set_split_filename_function(state, put_split_file);
+  mp3splt_set_split_filename_function(state, put_split_file, data);
 
   //default we write mins_secs_hundr for normal split
   mp3splt_set_int_option(state, SPLT_OPT_OUTPUT_FILENAMES, SPLT_OUTPUT_DEFAULT);
@@ -132,7 +146,7 @@ int main(int argc, char **orig_argv)
   //parse command line options
   int option;
   while ((option = getopt(data->argc, data->argv,
-          "m:O:Dvifkwleqnasrc:d:o:t:p:g:hQN12T:XxPE:A:S:G:")) != -1)
+          "m:O:DvifKkwleqnasrc:d:o:t:p:g:hQN12T:XxPE:A:S:G:F:C:I:")) != -1)
   {
     switch (option)
     {
@@ -156,8 +170,7 @@ int main(int argc, char **orig_argv)
         break;
       case 'T':
         opt->T_option_value = atoi(optarg);
-        mp3splt_set_int_option(state, SPLT_OPT_FORCE_TAGS_VERSION,
-            opt->T_option_value);
+        mp3splt_set_int_option(state, SPLT_OPT_FORCE_TAGS_VERSION, opt->T_option_value);
         opt->T_option = SPLT_TRUE;
         break;
       case 'D':
@@ -176,6 +189,9 @@ int main(int argc, char **orig_argv)
       case 'k':
         mp3splt_set_int_option(state, SPLT_OPT_INPUT_NOT_SEEKABLE, SPLT_TRUE);
         opt->k_option = SPLT_TRUE;
+        break;
+      case 'K':
+        opt->K_option = SPLT_TRUE;
         break;
       case 'w':
         mp3splt_set_int_option(state, SPLT_OPT_SPLIT_MODE, SPLT_OPTION_WRAP_MODE);
@@ -217,6 +233,38 @@ int main(int argc, char **orig_argv)
         opt->c_option = SPLT_TRUE;
         opt->cddb_arg = strdup(optarg);
         break;
+      case 'C':
+        ;
+        int intarg = atoi(optarg);
+        if (intarg == 8)
+        {
+          mp3splt_set_int_option(state, SPLT_OPT_ID3V2_ENCODING, SPLT_ID3V2_UTF8);
+        }
+        else if (intarg == 16)
+        {
+          mp3splt_set_int_option(state, SPLT_OPT_ID3V2_ENCODING, SPLT_ID3V2_UTF16);
+        }
+        else if (intarg == 1)
+        {
+          mp3splt_set_int_option(state, SPLT_OPT_ID3V2_ENCODING, SPLT_ID3V2_LATIN1);
+        }
+        break;
+      case 'I':
+        ;
+        int intarg2 = atoi(optarg);
+        if (intarg2 == 8)
+        {
+          mp3splt_set_int_option(state, SPLT_OPT_INPUT_TAGS_ENCODING, SPLT_ID3V2_UTF8);
+        }
+        else if (intarg2 == 16)
+        {
+          mp3splt_set_int_option(state, SPLT_OPT_INPUT_TAGS_ENCODING, SPLT_ID3V2_UTF16);
+        }
+        else if (intarg2 == 1)
+        {
+          mp3splt_set_int_option(state, SPLT_OPT_INPUT_TAGS_ENCODING, SPLT_ID3V2_LATIN1);
+        }
+        break;
       case 'P':
         opt->P_option = SPLT_TRUE;
         mp3splt_set_int_option(state, SPLT_OPT_PRETEND_TO_SPLIT, SPLT_TRUE);
@@ -233,6 +281,11 @@ int main(int argc, char **orig_argv)
         opt->m_option = SPLT_TRUE;
         opt->m3u_arg = strdup(optarg);
         mp3splt_set_m3u_filename(state, opt->m3u_arg);
+        break;
+      case 'F':
+        opt->F_option = SPLT_TRUE;
+        opt->full_log_arg = strdup(optarg);
+        mp3splt_set_silence_full_log_filename(state, opt->full_log_arg);
         break;
       case 'S':
         opt->S_option = SPLT_TRUE;
@@ -284,18 +337,35 @@ int main(int argc, char **orig_argv)
         break;
       case 't':
         mp3splt_set_int_option(state, SPLT_OPT_SPLIT_MODE, SPLT_OPTION_TIME_MODE);
-        long converted_time = c_hundreths(optarg);
 
+        // Token will point to "SEVERAL".
+        char *first = strtok(optarg, ">");
+        char *second = strtok(NULL, ">");
+
+        long converted_time = c_hundreths(first);
         if (converted_time != -LONG_MAX)
         {
-          float split_time = (float)converted_time / 100.0;
-          mp3splt_set_float_option(state, SPLT_OPT_SPLIT_TIME, split_time);
+          mp3splt_set_long_option(state, SPLT_OPT_SPLIT_TIME, converted_time);
         }
         else
         {
           print_error_exit(_("bad time expression for the time split.\n"
                 "\tMust be min.sec[.0-99] or EOF-min.sec[.0-99], read man page for details."), data);
         }
+
+        if (second != NULL)
+        {
+          long time_minimum_length = c_hundreths(second);
+          if (time_minimum_length == -LONG_MAX)
+          {
+            print_error_exit(_("bad minimum time expression.\n"
+                  "\tMust be min.sec[.0-99] or EOF-min.sec[.0-99], read man page for details."), data);
+          }
+
+          mp3splt_set_long_option(state, SPLT_OPT_TIME_MINIMUM_THEORETICAL_LENGTH,
+              time_minimum_length);
+        }
+
         opt->t_option = SPLT_TRUE;
         break;
       case 'p':
@@ -356,8 +426,7 @@ int main(int argc, char **orig_argv)
         fclose(stdout);
         break;
       default:
-        print_error_exit(_("read man page for documentation"
-              " or type 'mp3splt -h'."), data);
+        print_error_exit(_("read man page for documentation or type 'mp3splt -h'."), data);
         break;
     }
   }
@@ -365,7 +434,7 @@ int main(int argc, char **orig_argv)
   //callback for the progress bar
   if (!opt->q_option && !opt->X_option)
   {
-    mp3splt_set_progress_function(state, put_progress_bar);
+    mp3splt_set_progress_function(state, put_progress_bar, data);
   }
 
   //if quiet, does not write authors and other
@@ -414,32 +483,48 @@ int main(int argc, char **orig_argv)
   //if we have parameter options
   if (opt->p_option)
   {
-    float th = -200,off = -200,min = -200, min_track_length = -200;
-    int gap = -200,nt = -200,rm = -200, shots = -200;
+    float th = -200, off = -200, min = -200, min_track_length = -200;
+    int gap = -200, nt = -200, rm = -200, shots = -200;
+    float min_track_join = -200;
+    float keep_silence_left = -200, keep_silence_right = -200;
     int parsed_p_options = 
-      parse_silence_options(opt->param_args, &th, &gap, &nt, &off, &rm, &min, &min_track_length, &shots);
+      parse_silence_options(opt->param_args, &th, &gap, &nt, &off, &rm, &min, &min_track_length,
+          &shots, &min_track_join, &keep_silence_left, &keep_silence_right);
     if (parsed_p_options < 1)
     {
       print_error_exit(_("bad argument for -p option. No valid value was recognized !"), data);
     }
 
+    if (keep_silence_left >= 0)
+    {
+      mp3splt_set_float_option(state, SPLT_OPT_KEEP_SILENCE_LEFT, keep_silence_left);
+    }
+    if (keep_silence_right >= 0)
+    {
+      mp3splt_set_float_option(state, SPLT_OPT_KEEP_SILENCE_RIGHT, keep_silence_right);
+    }
+
+    if (min_track_join > 0)
+    {
+      mp3splt_set_float_option(state, SPLT_OPT_PARAM_MIN_TRACK_JOIN, min_track_join);
+    }
     if (shots != -200)
     {
       mp3splt_set_int_option(state, SPLT_OPT_PARAM_SHOTS, shots);
     }
-    if (th != -200)
+    if (th > -100)
     {
       mp3splt_set_float_option(state, SPLT_OPT_PARAM_THRESHOLD, th);
     }
-    if (off != -200)
+    if (off > -3)
     {
       mp3splt_set_float_option(state, SPLT_OPT_PARAM_OFFSET, off);
     }
-    if (min != -200)
+    if (min >= 0)
     {
       mp3splt_set_float_option(state, SPLT_OPT_PARAM_MIN_LENGTH, min);
     }
-    if (min_track_length != -200)
+    if (min_track_length > 0)
     {
       mp3splt_set_float_option(state, SPLT_OPT_PARAM_MIN_TRACK_LENGTH, min_track_length);
     }
@@ -461,7 +546,7 @@ int main(int argc, char **orig_argv)
   if (opt->o_option)
   {
     mp3splt_set_int_option(state, SPLT_OPT_CREATE_DIRS_FROM_FILENAMES, SPLT_TRUE);
-    mp3splt_set_oformat(state, opt->output_format,&output_format_error);
+    output_format_error = mp3splt_set_oformat(state, opt->output_format);
     process_confirmation_error(output_format_error, data);
   }
 
@@ -501,7 +586,7 @@ int main(int argc, char **orig_argv)
     }
     else
     {
-      if (mp3splt_u_check_if_directory(argument))
+      if (mp3splt_check_if_directory(argument))
       {
         we_had_directory_as_argument = SPLT_TRUE;
 
@@ -620,32 +705,42 @@ int main(int argc, char **orig_argv)
     }
     fflush(console_out);
 
-    if ((strcmp(current_filename, "-") == 0 || strcmp(current_filename, "o-") == 0) &&
-        we_have_incompatible_stdin_option(opt))
+    if (is_stdin(current_filename) && we_have_incompatible_stdin_option(opt))
     {
       print_error_exit(_("cannot use -k option (or STDIN) with"
-            " one of the following options: -S -s -r -w -l -e -i -a -p"), data);
+            " one of the following options: -S -s -r -w -l -e -i -a -p -K"), data);
     }
 
     //we put the filename
     err = mp3splt_set_filename_to_split(state, current_filename);
     process_confirmation_error(err, data);
 
+    if (opt->K_option)
+    {
+      mp3splt_read_original_tags(state);
+      mp3splt_set_int_option(state, SPLT_OPT_CUE_CDDB_ADD_TAGS_WITH_KEEP_ORIGINAL_TAGS,
+          SPLT_TRUE);
+    }
+
     //if we list wrap files
     if (opt->l_option)
     {
       //if no error when putting the filename to split
-      const splt_wrap *wrap_files;
-      wrap_files = mp3splt_get_wrap_files(state,&err);
+      splt_wrap *wrap_files = mp3splt_get_wrap_files(state, &err);
       process_confirmation_error(err, data);
 
       //if no error when getting the wrap files
-      int wrap_files_number = wrap_files->wrap_files_num;
-      int i = 0;
+      mp3splt_wrap_init_iterator(wrap_files);
       fprintf(stdout,"\n");
-      for (i = 0;i < wrap_files_number;i++)
+      const splt_one_wrap *one_wrap = NULL;
+      while ((one_wrap = mp3splt_wrap_next(wrap_files)))
       {
-        fprintf(stdout,"%s\n",wrap_files->wrap_files[i]);
+        char *wrap_file = mp3splt_wrap_get_wrapped_file(one_wrap);
+        if (wrap_file)
+        {
+          fprintf(stdout,"%s\n", wrap_file);
+          free(wrap_file);
+        }
       }
       fprintf(stdout,"\n");
       fflush(stdout);
@@ -657,7 +752,7 @@ int main(int argc, char **orig_argv)
       if (opt->i_option)
       {
         err = SPLT_OK;
-        mp3splt_count_silence_points(state, &err);
+        mp3splt_set_silence_points(state, &err);
         process_confirmation_error(err, data);
       }
       else
@@ -667,12 +762,21 @@ int main(int argc, char **orig_argv)
           if ((strstr(opt->cddb_arg, ".cue")!=NULL)||
               (strstr(opt->cddb_arg, ".CUE")!=NULL))
           {
-            mp3splt_put_cue_splitpoints_from_file(state, opt->cddb_arg, &err);
+            err = mp3splt_import(state, CUE_IMPORT, opt->cddb_arg);
+            process_confirmation_error(err, data);
+
+            err = SPLT_OK;
+            splt_point *splitpoint = mp3splt_point_new(LONG_MAX, &err);
+            process_confirmation_error(err, data);
+            err = mp3splt_append_splitpoint(state, splitpoint);
+            process_confirmation_error(err, data);
+
+            err = mp3splt_remove_tags_of_skippoints(state);
             process_confirmation_error(err, data);
           }
           else
           {
-            if (strncmp(opt->cddb_arg, "query", 5)==0)
+            if (strncmp(opt->cddb_arg, "query", 5) == 0)
             {
               if (j == 0)
               {
@@ -685,19 +789,19 @@ int main(int argc, char **orig_argv)
                 do_freedb_search(data);
               }
 
-              mp3splt_put_cddb_splitpoints_from_file(state, MP3SPLT_CDDBFILE, &err);
+              err = mp3splt_import(state, CDDB_IMPORT, MP3SPLT_CDDBFILE);
               process_confirmation_error(err, data);
             }
             else
             {
-              mp3splt_put_cddb_splitpoints_from_file(state, opt->cddb_arg, &err);
+              err = mp3splt_import(state, CDDB_IMPORT, opt->cddb_arg);
               process_confirmation_error(err, data);
             }
           }
         }
         else if (opt->audacity_labels_arg)
         {
-          mp3splt_put_audacity_labels_splitpoints_from_file(state, opt->audacity_labels_arg, &err);
+          err = mp3splt_import(state, AUDACITY_LABELS_IMPORT, opt->audacity_labels_arg);
           process_confirmation_error(err, data);
         }
         else if (normal_split)
@@ -705,8 +809,10 @@ int main(int argc, char **orig_argv)
           //we set the splitpoints to the library
           for (i = 0;i < data->number_of_splitpoints; i++)
           {
-            long point = data->splitpoints[i];
-            err = mp3splt_append_splitpoint(state, point, NULL, SPLT_SPLITPOINT);
+            splt_point *splitpoint = mp3splt_point_new(data->splitpoints[i], &err);
+            process_confirmation_error(err, data);
+
+            err = mp3splt_append_splitpoint(state, splitpoint);
             process_confirmation_error(err, data);
           }
         }
@@ -765,8 +871,7 @@ int main(int argc, char **orig_argv)
 
     if (opt->E_option)
     {
-      err = SPLT_OK;
-      mp3splt_export_to_cue(state, opt->export_cue_arg, SPLT_TRUE, &err);
+      err = mp3splt_export(state, CUE_EXPORT, opt->export_cue_arg, SPLT_TRUE);
       process_confirmation_error(err, data);
     }
 
@@ -791,12 +896,10 @@ int main(int argc, char **orig_argv)
       fflush(console_out);
     }
 
-    err = SPLT_OK;
-    mp3splt_erase_all_tags(state, &err);
+    err = mp3splt_erase_all_tags(state);
     process_confirmation_error(err, data);
 
-    err = SPLT_OK;
-    mp3splt_erase_all_splitpoints(state,&err);
+    err = mp3splt_erase_all_splitpoints(state);
     process_confirmation_error(err, data);
   }
 

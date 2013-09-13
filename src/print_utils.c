@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #include "common.h"
@@ -46,12 +46,62 @@ void print_error(const char *e)
   fflush(console_err);
 }
 
-void put_library_message(const char *message, splt_message_type mess_type)
+static void print_with_spaces_after(const char *printed_value, int print_carriage_return, 
+    FILE *file, main_data *data)
+{
+  char *value = strdup(printed_value);
+  if (!value)
+  {
+    print_warning(_("cannot allocate memory !"));
+  }
+
+  char temp[2048] = "";
+  int this_spaces = strlen(value);
+  int counter = strlen(value);
+  while (counter <= data->printed_value_length)
+  {
+    temp[counter-this_spaces] = ' ';
+    counter++;
+  }
+  temp[counter] = '\0';
+
+  if (print_carriage_return)
+  {
+    fprintf(file, "%s%s\r", value, temp);
+  }
+  else
+  {
+    int has_slash_n = SPLT_FALSE;
+    if (strlen(value) > 0)
+    {
+      if (value[strlen(value)-1] == '\n')
+      {
+        has_slash_n = SPLT_TRUE;
+      }
+    }
+
+    if (has_slash_n)
+    {
+      value[strlen(value)-1] = '\0';
+      fprintf(file, "%s%s\n", value, temp);
+    }
+    else
+    {
+      fprintf(file, "%s%s", value, temp);
+    }
+  }
+
+  fflush(file);
+
+  free(value);
+}
+
+void put_library_message(const char *message, splt_message_type mess_type, void *user_data)
 {
   if (mess_type == SPLT_MESSAGE_INFO)
   {
-    fprintf(console_out,"%s",message);
-    fflush(console_out);
+    main_data *data = (main_data *) user_data;
+    print_with_spaces_after(message, SPLT_FALSE, console_out, data);
   }
   else if (mess_type == SPLT_MESSAGE_DEBUG)
   {
@@ -60,12 +110,14 @@ void put_library_message(const char *message, splt_message_type mess_type)
   }
 }
 
-void put_split_file(const char *file, int progress_data)
+void put_split_file(const char *file, void *user_data)
 {
+  main_data *data = (main_data *) user_data;
+
   char temp[1024] = "";
   int this_spaces = strlen(file)+16;
   int counter = strlen(file)+16;
-  while (counter <= progress_data)
+  while (counter <= data->printed_value_length)
   {
     temp[counter-this_spaces] = ' ';
     counter++;
@@ -76,41 +128,47 @@ void put_split_file(const char *file, int progress_data)
   fflush(console_out);
 }
 
-void put_progress_bar(splt_progress *p_bar)
+void put_progress_bar(splt_progress *p_bar, void *user_data)
 {
-  char progress_text[2048] = " ";
+  main_data *data = (main_data *)user_data;
 
-  switch (p_bar->progress_type)
+  char progress_text[2048] = " ";
+  char *filename_shorted = mp3splt_progress_get_filename_shorted(p_bar);
+
+  switch (mp3splt_progress_get_type(p_bar))
   {
     case SPLT_PROGRESS_PREPARE:
       snprintf(progress_text,2047,
           _(" preparing \"%s\" (%d of %d)"),
-          p_bar->filename_shorted,
-          p_bar->current_split,
-          p_bar->max_splits);
+          filename_shorted,
+          mp3splt_progress_get_current_split(p_bar),
+          mp3splt_progress_get_max_splits(p_bar));
       break;
     case SPLT_PROGRESS_CREATE:
       snprintf(progress_text,2047,
           _(" creating \"%s\" (%d of %d)"),
-          p_bar->filename_shorted,
-          p_bar->current_split,
-          p_bar->max_splits);
+          filename_shorted,
+          mp3splt_progress_get_current_split(p_bar),
+          mp3splt_progress_get_max_splits(p_bar));
       break;
     case SPLT_PROGRESS_SEARCH_SYNC:
       snprintf(progress_text,2047,
           _(" searching for sync errors..."));
       break;
     case SPLT_PROGRESS_SCAN_SILENCE:
-      if (p_bar->silence_found_tracks > 0)
+      ;
+      int silence_found_tracks = mp3splt_progress_get_silence_found_tracks(p_bar);
+      float silence_db_level = mp3splt_progress_get_silence_db_level(p_bar);
+      if (silence_found_tracks > 0)
       {
         snprintf(progress_text,2047,
             _("S: %02d, Level: %.2f dB; scanning for silence..."),
-            p_bar->silence_found_tracks, p_bar->silence_db_level);
+            silence_found_tracks, silence_db_level);
       }
       else {
         snprintf(progress_text,2047,
             _("Level: %.2f dB; scanning for silence..."),
-            p_bar->silence_db_level);
+            silence_db_level);
       }
       break;
     default:
@@ -118,42 +176,32 @@ void put_progress_bar(splt_progress *p_bar)
       break;
   }
 
+  float percent_progress = mp3splt_progress_get_percent_progress(p_bar);
+
   char printed_value[2048] = "";
   //we update the progress
-  if (p_bar->percent_progress <= 0.01)
+  if (percent_progress <= 0.01)
   {
-    snprintf(printed_value,2047," [ - %%] %s", progress_text);
+    snprintf(printed_value, 2047," [ - %%] %s", progress_text);
   }
   else
   {
-    snprintf(printed_value,2047," [ %.2f %%] %s",
-        p_bar->percent_progress * 100, progress_text);
+    snprintf(printed_value, 2047," [ %.2f %%] %s", percent_progress * 100, progress_text);
   }
 
-  //we put necessary spaces
-  char temp[2048] = "";
-  int this_spaces = strlen(printed_value);
-  int counter = strlen(printed_value);
-  while (counter <= p_bar->user_data)
-  {
-    temp[counter-this_spaces] = ' ';
-    counter++;
-  }
-  temp[counter] = '\0';
+  print_with_spaces_after(printed_value, SPLT_TRUE, console_progress, data);
+  data->printed_value_length = strlen(printed_value) + 1;
 
-  fprintf(console_progress,"%s%s\r",printed_value,temp);
-  fflush(console_progress);
-
-  p_bar->user_data = strlen(printed_value)+1;
+  free(filename_shorted);
 }
 
 void print_version(FILE *std)
 {
-  char version[128] = { '\0' };
-  mp3splt_get_version(version);
+  char *version = mp3splt_get_version();
   fprintf(std, PACKAGE_NAME" "VERSION" ("MP3SPLT_DATE") -"
-      " %s libmp3splt %s\n",_("using"),version);
+      " %s libmp3splt %s\n",_("using"), version);
   fflush(std);
+  free(version);
 }
 
 void print_authors(FILE *std)
@@ -251,7 +299,8 @@ void show_small_help_exit(main_data *data)
   print_message(_(" -m + M3U_FILE: Appends to the specified m3u file the split filenames.\n"
         " -f   Frame mode (mp3 only): process all frames. For higher precision and VBR.\n"
         " -a   Auto-Adjust splitpoints with silence detection. (Use -p for arguments)"));
-  print_message(_(" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin, shots): user arguments for -s and -a.\n"
+  print_message(_(" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin, shots, trackjoin): "
+                  "user arguments for -s, -a, -t.\n"
         " -o + FORMAT: output filename pattern. Can contain those variables:\n"
         "      @a: artist tag, @p: performer tag (might not exists), @b: album tag\n"
         "      @t: title tag, @n: track number identifier, @N: track tag number\n"

@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2012 Alexandru Munteanu - <io_fx@yahoo.fr>
+ * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -18,7 +18,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111, USA.
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 #include "common.h"
@@ -86,6 +86,12 @@ void free_options(options **opt)
         (*opt)->m3u_arg = NULL;
       }
 
+      if ((*opt)->full_log_arg)
+      {
+        free((*opt)->full_log_arg);
+        (*opt)->full_log_arg = NULL;
+      }
+
       if ((*opt)->param_args)
       {
         free((*opt)->param_args);
@@ -128,6 +134,7 @@ options *new_options()
   opt->r_option = SPLT_FALSE;
   opt->p_option = SPLT_FALSE; opt->o_option = SPLT_FALSE;
   opt->d_option = SPLT_FALSE; opt->k_option = SPLT_FALSE;
+  opt->K_option = SPLT_FALSE;
   opt->g_option = SPLT_FALSE; opt->n_option = SPLT_FALSE;
   opt->q_option = SPLT_FALSE; opt->i_option = SPLT_FALSE;
   opt->N_option = SPLT_FALSE; opt->O_option = SPLT_FALSE;
@@ -139,6 +146,7 @@ options *new_options()
   opt->qq_option = SPLT_FALSE;
   opt->A_option = SPLT_FALSE;
   opt->m_option = SPLT_FALSE;
+  opt->F_option = SPLT_FALSE;
   opt->S_option = SPLT_FALSE;
   opt->S_option_value = 0;
   opt->tags_from_fname_regex_arg = NULL;
@@ -146,8 +154,9 @@ options *new_options()
   opt->dir_arg = NULL;
   opt->export_cue_arg = NULL;
   opt->audacity_labels_arg = NULL;
-  opt->param_args = NULL;
   opt->m3u_arg = NULL;
+  opt->full_log_arg = NULL;
+  opt->param_args = NULL;
   opt->output_format = NULL;
 
   opt->custom_tags = NULL;
