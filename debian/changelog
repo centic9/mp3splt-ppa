@@ -1,4 +1,10 @@
-mp3splt (2.6) raring; urgency=low
+mp3splt (2.6.0-0ubuntu0~ppa1) precise; urgency=low
+
+  * New upstream release.
+
+ -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Fri, 13 Sep 2013 22:38:23 +0200
+
+mp3splt (2.6.0) raring; urgency=low
 
   * Non-maintainer upload.
   * New Upstream Version
