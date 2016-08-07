@@ -1,6 +1,12 @@
+mp3splt (2.6.0-0ubuntu0~ppa3) xenial; urgency=medium
+
+  * Re-upload for Xenial.
+
+ -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Sun, 07 Aug 2016 17:23:30 +0200
+
 mp3splt (2.6.0-0ubuntu0~ppa2) trusty; urgency=medium
 
-  * Re-upload for trusty.
+  * Re-upload for Trusty.
 
  -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Thu, 26 Jun 2014 22:22:31 +0200
 
