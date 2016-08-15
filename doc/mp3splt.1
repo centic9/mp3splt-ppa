@@ -243,6 +243,10 @@ with consecutive tracks (such as live performances) might be only a waste of tim
 of a ".CUE" file (note that it must end with ".cue", otherwise it will be wrongly
 interpreted as a cddb file) or a local .XMCD (.CDDB) file on your hard disk.
 
+Furthermore, if you want to split using internal sheets, SOURCE must be \fBinternal_sheet\fP.
+Currently two internal sheets are supported: internal CUE sheet of native FLAC files and ID3v2
+chapters for MP3 files (note that there is a limitation on ID3v2 chapters for overlapped chapters).
+
 If you want to get informations from Internet, SOURCE must have one of the
 following formats:
 
@@ -398,6 +402,12 @@ Positive integer for the time to decode before and after splitpoint, increase if
 are completely wrong, or decrease if wrong for only few seconds. Of course the smaller the gap, the faster the process.
 Default gap is 30 seconds (so for each song, total decode time is one minute).
 
+.IP \fBwarn_if_no_aa\fP
+Print a warning for each splitpoint if it has not been auto-adjusted.
+
+.IP \fBerror_if_no_aa\fP
+Stop the split process with error if one of the splitpoints has not been auto-adjusted.
+
 .IP "\fB\-f\fP         " 10
 \fBFrame mode (mp3 only)\fP. Process all frames, seeking split positions by counting frames and not
 with bitrate guessing. In this mode you have higher precision and you can
@@ -408,6 +418,14 @@ that uses time seeking with bitrate guessing, so make your choice.
 Frame mode will print extra info on split process, such as sync errors.
 If you obtain some sync errors, try also to split with \-e option.
 
+.IP "\fB\-b\fP         " 10
+\fB[Experimental] Bit reservoir handling for gapless playback (mp3 only)\fP. Handles bit reservoir issues when
+splitting mp3 files. This option also allows playback at the exact sample specified by the input time, instead
+of the music data boundaries. \fBWarning: split files will play gapless only on players supporting mp3 gapless
+playback using the LAME tag delay and padding values\fP (example of gapless mp3 players: cmus, mpg123, foobar2000).
+The feature is heavily inspired by pcutmp3 developed by Sebastian Gesemann.
+Use with caution because it is still an experimental feature.
+
 .IP "\fB\-k\fP         " 10
 \fBInput not seekable\fP. Consider input not seekable (default when using STDIN as input).
 This allows you to split mp3 streams which can be read only one time and can't be
@@ -415,6 +433,15 @@ seeked. Both framemode and standard mode are available, but framemode can be rea
 files, because to seek splitpoints we need to process all bytes and all frames. \-k option
 (so STDIN as input too) can't be used together with \-s \-a \-w \-e, because input must be seekable for
 those options. Copying original tags is not yet supported for the non seekable option.
+
+.IP "\fB\-M\fP         " 10
+\fBWrite MD5 sum (FLAC only)\fP. Using this option, the frames are decoded just before being written in
+the output files and MD5 sum of the unencoded data is computed in order to complete the STREAMINFO 
+metadata block of the created files.
+This option is disabled by default because the decoding process makes the split to be
+much slower (it can be twice slower).
+However, even when using this option, the process remains faster compared to splitting by decoding
+and then re-encoding.
 
 .IP "\fB\-O TIME\fP         " 10
 \fBOverlap split files\fP. TIME will be added to each end splitpoint.
@@ -459,6 +486,8 @@ It can contain name variables, that must begin with @ char and that can be:
 @U: track tag number as uppercase letter**
 .br
 @f: input filename (without extension)
+.br
+@d: last directory of the input filename or the filename itself if no directory
 .br
 @m, @s or @h: the number of minutes, seconds or hundreths of seconds of the start splitpoint**
 .br
@@ -765,7 +794,7 @@ for latest release.
 .PP
 (C) 2002-2005 by Matteo Trotta
 .br
-(C) 2005-2013 by Alexandru Ionut Munteanu
+(C) 2005-2014 by Alexandru Ionut Munteanu
 .PP
 Permission is granted to copy, distribute and/or modify
 this document under the terms of the GNU General Public License.

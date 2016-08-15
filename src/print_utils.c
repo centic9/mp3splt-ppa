@@ -2,7 +2,7 @@
  * Mp3Splt -- Utility for mp3/ogg splitting without decoding
  *
  * Copyright (c) 2002-2005 M. Trotta - <mtrotta@users.sourceforge.net>
- * Copyright (c) 2005-2013 Alexandru Munteanu - <m@ioalex.net>
+ * Copyright (c) 2005-2014 Alexandru Munteanu - <m@ioalex.net>
  *
  * http://mp3splt.sourceforge.net
  *
@@ -102,6 +102,11 @@ void put_library_message(const char *message, splt_message_type mess_type, void 
   {
     main_data *data = (main_data *) user_data;
     print_with_spaces_after(message, SPLT_FALSE, console_out, data);
+  }
+  else if (mess_type == SPLT_MESSAGE_WARNING)
+  {
+    main_data *data = (main_data *) user_data;
+    print_with_spaces_after(message, SPLT_FALSE, console_err, data);
   }
   else if (mess_type == SPLT_MESSAGE_DEBUG)
   {
@@ -238,28 +243,33 @@ void print_message_exit(const char *m, main_data *data)
   exit(0);
 }
 
-void process_confirmation_error(int conf, main_data *data)
+void process_confirmation_error(int error, main_data *data)
 {
   char *error_from_library = NULL;
-  error_from_library = mp3splt_get_strerror(data->state, conf);
+  error_from_library = mp3splt_get_strerror(data->state, error);
   if (error_from_library != NULL)
   {
-    if (conf >= 0)
+    if (error >= 0)
     {
       print_message(error_from_library);
       free(error_from_library);
     }
     else
     {
-      fprintf(console_err,"%s\n",error_from_library);
-      fflush(console_err);
+      int size = strlen(error_from_library) + 10;
+      char *error_with_slash_n = malloc(sizeof(char) * size);
+      snprintf(error_with_slash_n, size, "%s\n", error_from_library);
+      print_with_spaces_after(error_with_slash_n, SPLT_FALSE, console_err, data);
+      free(error_with_slash_n);
+
       free(error_from_library);
       free_main_struct(&data);
       exit(1);
     }
     error_from_library = NULL;
   }
-  if (conf == SPLT_DEWRAP_OK)
+
+  if (error == SPLT_DEWRAP_OK)
   {
     print_message(_("\nAll files have been split correctly."
           " Visit http://mp3wrap.sourceforge.net!"));
@@ -277,9 +287,9 @@ void show_small_help_exit(main_data *data)
         "                   or EOF-min.sec[.0-99] (or EOF for End Of File). "));
   print_message(_("\nOPTIONS (split mode options)\n"
         " -t + TIME: to split files every fixed time len. (TIME format same as above). \n"
-        " -c + file.cddb, file.cue or \"query\" or \"query{album}\". Get splitpoints and\n"
-        "      filenames from a .cddb or .cue file or from Internet (\"query\").\n"
-        "      Use -a to auto-adjust splitpoints."));
+        " -c + file.cddb, file.cue or \"query\" or \"query{album}\" or \"internal_sheet\".\n"
+        "      Get splitpoints and filenames from a .cddb or .cue file or from Internet\n"
+        "      (\"query\"). Use -a to auto-adjust splitpoints."));
   print_message(_(" -s   Silence detection: automatically find splitpoint. (Use -p for arguments)\n"
         " -w   Splits wrapped files created with Mp3Wrap or AlbumWrap.\n"
         " -l   Lists the tracks from file without extraction. (Only for wrapped mp3)\n"
@@ -298,6 +308,7 @@ void show_small_help_exit(main_data *data)
         "      (default is to set the same version as the file to split)"));
   print_message(_(" -m + M3U_FILE: Appends to the specified m3u file the split filenames.\n"
         " -f   Frame mode (mp3 only): process all frames. For higher precision and VBR.\n"
+        " -b   [Experimental] Bit reservoir handling for gapless playback (mp3 only).\n"
         " -a   Auto-Adjust splitpoints with silence detection. (Use -p for arguments)"));
   print_message(_(" -p + PARAMETERS (th, nt, off, min, rm, gap, trackmin, shots, trackjoin): "
                   "user arguments for -s, -a, -t.\n"
