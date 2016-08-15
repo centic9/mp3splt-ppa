@@ -4,7 +4,25 @@ mp3splt (2.6.2) trusty; urgency=low
 
  -- Alexandru Munteanu <m@ioalex.net>  Fri, 9 May 2014 00:00:00 +0100
 
-mp3splt (2.6.0) trusty; urgency=low
+mp3splt (2.6.0-0ubuntu0~ppa3) xenial; urgency=medium
+
+  * Re-upload for Xenial.
+
+ -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Sun, 07 Aug 2016 17:23:30 +0200
+
+mp3splt (2.6.0-0ubuntu0~ppa2) trusty; urgency=medium
+
+  * Re-upload for Trusty.
+
+ -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Thu, 26 Jun 2014 22:22:31 +0200
+
+mp3splt (2.6.0-0ubuntu0~ppa1) precise; urgency=low
+
+  * New upstream release.
+
+ -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Fri, 13 Sep 2013 22:38:23 +0200
+
+mp3splt (2.6.0) raring; urgency=low
 
   * Non-maintainer upload.
   * New Upstream Version
