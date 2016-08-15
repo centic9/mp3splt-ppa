@@ -4,9 +4,9 @@ Forwarded: no
 
 Index: mp3splt/doc/mp3splt.1
 ===================================================================
---- mp3splt.orig/doc/mp3splt.1	2013-09-13 22:40:32.000000000 +0200
-+++ mp3splt/doc/mp3splt.1	2013-09-13 22:40:33.000000000 +0200
-@@ -270,7 +270,8 @@
+--- mp3splt.orig/doc/mp3splt.1	2016-08-15 10:53:06.645009238 +0200
++++ mp3splt/doc/mp3splt.1	2016-08-15 10:53:06.641009169 +0200
+@@ -274,7 +274,8 @@
  
  Examples:
  
@@ -16,7 +16,7 @@ Index: mp3splt/doc/mp3splt.1
  .br
    query[get=cddb_protocol://freedb.org:8880]
  .br
-@@ -603,7 +604,8 @@
+@@ -632,7 +633,8 @@
  Example: if the input filename is \fBartist1__album2__title3__comment4__2__2004__Samba.ogg\fP, 
  .br
  the following regular expression

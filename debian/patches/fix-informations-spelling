@@ -4,18 +4,18 @@ Forwarded: no
 
 Index: mp3splt/doc/mp3splt.1
 ===================================================================
---- mp3splt.orig/doc/mp3splt.1	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/doc/mp3splt.1	2013-09-13 22:39:33.000000000 +0200
-@@ -243,7 +243,7 @@
- of a ".CUE" file (note that it must end with ".cue", otherwise it will be wrongly
- interpreted as a cddb file) or a local .XMCD (.CDDB) file on your hard disk.
+--- mp3splt.orig/doc/mp3splt.1	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/doc/mp3splt.1	2016-08-15 10:53:00.592905433 +0200
+@@ -247,7 +247,7 @@
+ Currently two internal sheets are supported: internal CUE sheet of native FLAC files and ID3v2
+ chapters for MP3 files (note that there is a limitation on ID3v2 chapters for overlapped chapters).
  
 -If you want to get informations from Internet, SOURCE must have one of the
 +If you want to get information from Internet, SOURCE must have one of the
  following formats:
  
      \fBquery\fP
-@@ -277,7 +277,7 @@
+@@ -281,7 +281,7 @@
    query[get=cddb_cgi://freedb.org/~cddb/cddb.cgi:80]
  
  Mp3splt will connect to the server and start to find the requested
@@ -24,7 +24,7 @@ Index: mp3splt/doc/mp3splt.1
  server to get the selected album and (if no problem occurs) will
  write a file named "query.cddb" from which will get splitpoints and
  filenames.
-@@ -663,7 +663,7 @@
+@@ -692,7 +692,7 @@
  to STDOUT. This option cannot be used with STDOUT output.
  
  .IP "\fB\-D\fP         " 10
@@ -33,7 +33,7 @@ Index: mp3splt/doc/mp3splt.1
  about what is being done. Current print doesn't have a nice format.
  
  .IP "\fB\-v\fP         " 10
-@@ -691,7 +691,7 @@
+@@ -720,7 +720,7 @@
  \fBmp3splt  \-nf album.mp3  0.12  21.34.7  25.3  30.40  38.58\fP
  
  This is the use of \-n option and multiple splitpoints. Four files will be created
@@ -44,8 +44,8 @@ Index: mp3splt/doc/mp3splt.1
  
 Index: mp3splt/src/freedb.c
 ===================================================================
---- mp3splt.orig/src/freedb.c	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/src/freedb.c	2013-09-13 22:39:44.000000000 +0200
+--- mp3splt.orig/src/freedb.c	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/src/freedb.c	2016-08-15 10:53:00.592905433 +0200
 @@ -127,7 +127,7 @@
    //if we haven't chosen to search from the arguments, interactive search
    if (opt->freedb_arg_search_string[0] == '\0')
@@ -66,9 +66,9 @@ Index: mp3splt/src/freedb.c
      int cd_number = 0;
 Index: mp3splt/po/cs.po
 ===================================================================
---- mp3splt.orig/po/cs.po	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/po/cs.po	2013-09-13 22:39:44.000000000 +0200
-@@ -404,7 +404,7 @@
+--- mp3splt.orig/po/cs.po	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/po/cs.po	2016-08-15 10:53:00.592905433 +0200
+@@ -408,7 +408,7 @@
  msgstr ""
  
  #: src/freedb.c:130
@@ -79,9 +79,9 @@ Index: mp3splt/po/cs.po
  #: src/freedb.c:136
 Index: mp3splt/po/de_DE.po
 ===================================================================
---- mp3splt.orig/po/de_DE.po	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/po/de_DE.po	2013-09-13 22:39:44.000000000 +0200
-@@ -531,7 +531,7 @@
+--- mp3splt.orig/po/de_DE.po	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/po/de_DE.po	2016-08-15 10:53:00.596905502 +0200
+@@ -538,7 +538,7 @@
  msgstr " Freedb-Ermittlungstyp: %s , Seite: %s , Port: %d\n"
  
  #: src/freedb.c:130
@@ -92,9 +92,9 @@ Index: mp3splt/po/de_DE.po
  "zu finden."
 Index: mp3splt/po/es.po
 ===================================================================
---- mp3splt.orig/po/es.po	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/po/es.po	2013-09-13 22:39:44.000000000 +0200
-@@ -434,7 +434,7 @@
+--- mp3splt.orig/po/es.po	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/po/es.po	2016-08-15 10:53:00.596905502 +0200
+@@ -439,7 +439,7 @@
  msgstr ""
  
  #: src/freedb.c:130
@@ -105,9 +105,9 @@ Index: mp3splt/po/es.po
  "cd."
 Index: mp3splt/po/fr_FR.po
 ===================================================================
---- mp3splt.orig/po/fr_FR.po	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/po/fr_FR.po	2013-09-13 22:39:44.000000000 +0200
-@@ -544,7 +544,7 @@
+--- mp3splt.orig/po/fr_FR.po	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/po/fr_FR.po	2016-08-15 10:53:00.596905502 +0200
+@@ -551,7 +551,7 @@
  msgstr " Type de récupération freedb : %s , Site : %s , Port : %d\n"
  
  #: src/freedb.c:130
@@ -118,9 +118,9 @@ Index: mp3splt/po/fr_FR.po
  "trouver un CD."
 Index: mp3splt/po/mp3splt.pot
 ===================================================================
---- mp3splt.orig/po/mp3splt.pot	2013-09-13 22:34:39.000000000 +0200
-+++ mp3splt/po/mp3splt.pot	2013-09-13 22:39:44.000000000 +0200
-@@ -403,7 +403,7 @@
+--- mp3splt.orig/po/mp3splt.pot	2016-08-15 10:53:00.612905776 +0200
++++ mp3splt/po/mp3splt.pot	2016-08-15 10:53:00.596905502 +0200
+@@ -407,7 +407,7 @@
  msgstr ""
  
  #: src/freedb.c:130
