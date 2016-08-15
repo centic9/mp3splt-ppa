@@ -7,6 +7,34 @@ Known issues :
 
 - translated 'mp3splt -h' doesn't show complete message on utf8 on windows: won't fix ?
 
+#mp3splt version 2.6.2
+
+- added bit reservoir handling for gapless playback option using the -b parameter (see manual for details)
+- added @d to output format which is equal to: last directory of the input filename or the filename itself if no directory
+
+#mp3splt version 2.6.1b
+
+- bug fix: make sure to separate artist and performer in CUE files for use of @p and @a (libmp3splt)
+- bug fix on CUE: from INDEX format MM:SS:FF, handle FF as frames instead of hundreths (libmp3splt)
+- bug fix: issue when having input file inside several recursive symlinks (libmp3splt)
+- small improvement on CUE: also accept INDEX 1 and not only INDEX 01 (libmp3splt)
+
+#mp3splt version 2.6.1a
+
+- FLAC: fixed an important bug not allowing to split some files (libmp3splt)
+
+#mp3splt version 2.6.1
+
+- FLAC internal cue sheets support (-c internal_sheet)
+- simple MP3 chapter marks support (with no overlap) (-c internal_sheet)
+- added #161 FLAC option to compute and write MD5 sum in the STREAMINFO metadata block (-M)
+- fixed bug #159 with some FLAC files being detected as MP3; also look for the file extension
+  when detecting a file for a plugin (libmp3splt)
+- fixed bug '#160 ---last cue splitpoint--- created at 99 59 99 for mp3 files >100mins' (libmp3splt)
+- implemented feature request #103: show error message on failure to detect silence
+  added '-p error_if_no_aa' and '-p warn_if_no_aa' parameters to auto-adjust option
+- patch #9 to fix manpage linking for flacsplt/oggsplt and fixed some warnings
+
 #mp3splt version 2.6
 
 - experimental FLAC support added - stdin and stdout are not yet implemented
