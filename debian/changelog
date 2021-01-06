@@ -1,3 +1,16 @@
+mp3splt (2.6.2+20170630-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Use 3.0 (quilt) format, extract
+    10_Properly-zero-initialise-the-ogg-and-vorbis-state-st.patch from diff.
+  * 20_mp3splt-gtk-0.9.2-fno-common.patch from Getoo: Fix gcc 10 build error.
+    Closes: #957561
+  * Drop b-d on gnome-doc-utils, configure with --disable-gnome.
+    Closes: #947534
+  * Add missing b-d on libdbus-glib-1-dev.
+
+ -- Andreas Metzler <ametzler@debian.org>  Wed, 06 Jan 2021 17:59:57 +0100
+
 mp3splt (2.6.2+20170630-3) unstable; urgency=medium
 
   * Drop support for things that are deprecated and/or unmaintained in GNOME:

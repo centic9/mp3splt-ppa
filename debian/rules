@@ -136,6 +136,7 @@ $(gui_objdir)/config.status: mp3splt-gtk/configure
 					--disable-scrollkeeper		\
 					--enable-silent-rules		\
 					--disable-rpath			\
+					--disable-gnome                 \
 					LIBMP3SPLT_CFLAGS="$(lib_cflags)" \
 					LIBMP3SPLT_LIBS="$(lib_ldflags)" \
 					CPPFLAGS="$(CPPFLAGS)"		\
