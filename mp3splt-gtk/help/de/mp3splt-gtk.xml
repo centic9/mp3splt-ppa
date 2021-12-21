@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "0.0.1">
+<!ENTITY manrevision "0.1">
+<!ENTITY date "November 2010">
+<!ENTITY app "<application>&appname;</application>">
+<!ENTITY appname "mp3splt-gtk">
+]>
+<article id="index" lang="de">
+  <articleinfo>
+    <title>Handbuch von mp3splt-gtk</title>
+    <abstract role="description">
+      <para>mp3splt-gtk.</para>
+      <para>Ein Hilfsprogramm, das das verlustfreie Schneiden von MP3 und Ogg Vorbis-Dateien ermöglicht, sprich: Das Extrahieren der gewünschten Datenpakete und Audio-Frames ohne dafür die Datei neu komprimieren zu müssen - da hierbei Qualität verloren gehen würde.</para>
+    </abstract>
+    <copyright>
+      <year>2010</year>
+      <holder>Gunter Königsmann</holder>
+    </copyright>
+    <!-- translators: uncomment this:
+	 
+	 <copyright>
+	 <year>2010</year>
+	 <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+	 </copyright>
+	 
+    -->
+    
+    <legalnotice id="legalnotice">
+  <para>Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink url="ghelp:fdl">link</ulink> or in the file COPYING-DOCS distributed with this manual.</para>
+  <para>This manual is part of a collection of GNOME manuals distributed under the GFDL. If you want to distribute this manual separately from the collection, you can do so by adding a copy of the license to the manual, as described in section 6 of the license.</para>
+  <para>Many of the names used by companies to distinguish their products and services are claimed as trademarks. Where those names appear in any GNOME documentation, and the members of the GNOME Documentation Project are made aware of those trademarks, then the names are in capital letters or initial capital letters.</para>
+  <para>DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <orderedlist>
+      <listitem>
+	<para>DOCUMENT IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND</para>
+      </listitem>
+      <listitem>
+	<para>UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.</para>
+      </listitem>
+    </orderedlist></para>
+</legalnotice>
+
+ 
+  <author role="maintainer">
+    <firstname>Gunter</firstname> 
+    <surname>Königsmann</surname>
+  </author>
+    <revhistory>
+      <revision>
+        <revnumber>Handbuch von mp3splt-gtk V. 0.1</revnumber>
+        <date>16.11.2010</date>
+      </revision>
+    </revhistory>
+  </articleinfo>
+
+  <sect1 id="mp3splt_gtk-introduction">
+    <title>Einführung</title>
+    <para>Einführung</para>
+    <para>Die <application>mp3splt-gtk</application> Applikation erlaubt es, MP3 und Ogg Vorbis Dateien zu Schneiden und kommt dabei ohne ein erneutes Komprimieren der Dateien aus, bei dem jedes Mal Qualität verlorengeht.</para>
+    <figure id="Player-fig2">
+      <title>mp3splt-gtk direkt nach dem Start</title>
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="figures/mp3splt-gtk.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Zeigt <application>mp3splt-gtk</application> direkt nach dem Start.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+    <sect2 id="audiorec-tostartapp">
+      <title>Starten von mp3splt-gtk</title>
+      <para>mp3splt-gtk kann unter Anderem auf die folgenden Weisen aufgerufen werden:</para>
+      <itemizedlist>
+	<listitem>
+	  <para>
+	    Choose <menuchoice><guimenu>Sound and
+	    Video</guimenu><guimenuitem>mp3splt-gtk</guimenuitem></menuchoice>
+	    from the <guimenu>Applications</guimenu> menu.
+	  </para> 
+	</listitem>
+	<listitem>
+	  <para>
+	    Run <command>mp3splt-gtk</command> at the prompt in a
+	    terminal such as <application>gnome-terminal</application>, or
+	    from the <application>Run Application</application>
+	    dialogue.
+	  </para> 
+	</listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="mp3splt_gtk-closeapp">
+      <title>Beenden von mp3splt-gtk</title>
+      <para>Auch zum Schließen von <application>mp3splt-gtk</application> gibt es mehrere Optionen</para>
+      <itemizedlist>
+	<listitem>
+	  <para>
+	    choose
+	    <menuchoice><guimenu>File</guimenu><guimenuitem>Quit</guimenuitem></menuchoice>
+	  </para>
+	</listitem>
+	<listitem>
+	  <para>Drücke <keycombo><keycap>Strg</keycap><keycap>W</keycap></keycombo></para>
+	</listitem>
+	<listitem>
+	  <para>Drücken des X-förmigen Knopfes in der Titelleiste des Fensters</para>
+	</listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="mp3splt-features">
+      <title>Funktionen von mp3splt-gtk</title>
+      <para><application>mp3splt-gtk</application> erlaubt es, Audiodateien zu bearbeiten ohne, dass dabei qualität verlorengeht.</para>
+      <para>Dieses Programm ist auf Benutzbarkeit ausgelegt und dient den Folgenden Funktionen <itemizedlist>
+	  <listitem>
+	    <para>Die Fähigkeit, diverse Abspielprogramme anzusteuern.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Automatische Detektion der Punkte, an denen geschnitten werden muss.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Automatisches Feinabstimmen der Position von Schnittpunkten, dass sie in eine Stille fallen - so, dass der Benutzer nicht gezwungen ist, auf die Millisekunde genau zu arbeiten.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Der Import von Schnittpunkten eines bekannten Albums aus einer Internet-Datenbank wie freedb.</para>
+	  </listitem>
+	  <listitem>
+	    <para>Automatisches Trennen von Alben, die von albumwrap order mp3wrap in eine Datei zusammengefasst worden sind.</para>
+	  </listitem>
+	</itemizedlist></para> 
+    </sect2>
+  </sect1>
+  <sect1 id="mp3splt_gtk-BasicWorkflow">
+    <title>Normale Verwendung</title>
+    <sect2 id="mp3splt_gtk-OpenFile">
+      <title>Öffnen einer Datei</title>
+      <para>Den <guibutton> Wählen </guibutton>-Knopf drücken und die zu öffnende Datei auswählen.</para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-SetSplitPoints">
+      <title>Wähle die Teilungspunkte, an denen Tracks beginnen sollen.</title>
+      <sect3 id="mp3splt_gtk-SetSplitPointsManually">
+	<title>Manuelle Wahl der Teilungspunkte</title>
+	<para>Den <guibutton> Play </guibutton>-Knopf (ein graues Dreieck, das nach rechts zeigt) im <guilabel>Player</guilabel> tab drücken der Musik zuhören und immer dann den <guibutton>add</guibutton> Knopf-drücken (ebenfalls im <guilabel>Player</guilabel>-tab), wann immer ein neuer Track beginnen soll.</para>
+	<para>
+	  If you don't want to be made to press the button exactly at
+	  the right centisecond the <guibutton>add</guibutton>
+	  Preferences tab gives you the possibility to let the program
+	  fine-tune the split points you choose.
+	</para>
+      </sect3>
+      <sect3 id="mp3splt_gtk-SetSplitPointsAutomatically">
+	<title>Automatisches Setzen von Teilungspunkten</title>
+	<para>
+	  The <guilabel>Type of Split</guilabel> tab provides you with
+	  a wide choices of ways to select where to split a file into
+	  tracks. If you want to split a media into tracks others
+	  might have had access to before you can try searching for
+	  splitpoint readymades in the <guilabel>FreeDB</guilabel> tab
+	  instead.
+	</para>
+      </sect3>
+    </sect2>
+    <sect2 id="mp3splt_gtk-TrackInfos">
+      <title>Feinjustierung der Teilungspunkte und Informationen zu den Titeln</title>
+      <para>
+	  The <guilabel>Splitpoints</guilabel> tab now contains a list
+	  of points where tracks start or end. It also contains the
+	  information if this piece of the audio file is to be kept
+	  and how the corresponding track has to be named.
+      </para>
+      <figure id="Splitpoints">
+	<title>The split point tab</title>
+	<screenshot>
+	  <mediaobject>
+	    <imageobject>
+	      <imagedata fileref="figures/Tracklist.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase>Shows all split points and track names.</phrase>
+	    </textobject>
+	  </mediaobject>
+	</screenshot>
+      </figure>
+      <para>
+	If you want to change the start or end position of a track
+	or give it a name just do it at any time you want.
+      </para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-TrackExport">
+      <title>Exporting the tracks</title>
+      <para>
+	  Now press the button with the green <guibutton>check
+	  mark</guibutton> that is always visible in the menu
+	  line. mp3splt-gtk will output all tracks into single files. If
+	  anything goes wrong don't despair: Since one of the goals of
+	  mp3splt-gtk is to work completely lossless even if anything
+	  goes wrong not much is lost.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="mp3splt_gtk-BatchProcessing">
+    <title>Batch processing of files</title>
+    <para>
+      Besides manual and automatic splitting of a single file
+      mp3splt-gtk also supports automatic batch-processing of multiple
+      files at once.
+    </para>
+    <sect2 id="mp3splt_gtk-BatchProcessingEnable">
+      <title>Enabling batch processing mode</title>
+      <para>Go to the <guilabel>Type of split</guilabel> tab and there
+      to the <guilabel>File mode</guilabel> tab. After selecting
+      <guilabel>Batch processing</guilabel> here batch processing mode
+      is enabled</para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-BatchProcessingModeSet">
+      <title>Adding files in batch processing mode</title>
+      <para>
+	Go to the <guilabel>Type of split</guilabel> tab and there
+	to the <guilabel>Split mode</guilabel> tab and select after
+	which criteria you want the files to be split.
+      </para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-BatchProcessingFileAdd">
+      <title>Adding files in batch processing mode</title>
+      <para>Go to the <guilabel>Batch Processing</guilabel> tab and
+      add all files you want to be automatically processed.</para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-TrackExportII">
+      <title>Exporting the tracks</title>
+      <para>
+	Now press the button with the green <guibutton>check
+	mark</guibutton> that is always visible in the menu
+	line. mp3splt-gtk will output all tracks into single files. If
+	anything goes wrong don't despair: Since one of the goals of
+	mp3splt-gtk is to work completely lossless even if anything
+	goes wrong not much is lost.
+      </para>
+    </sect2>
+  </sect1>
+  <sect1 id="mp3splt_gtk-SaveResume">
+    <title>Saving and resuming your work</title>
+    <para>      
+	mp3splt-gtk contains an export feature that saves the current
+	project's state as a cue file. This cue file can later be
+	re-opened by mp3splt-gtk or be used by any cd burner or other
+	application that can read cue files. 
+    </para>      
+    <para>      
+      If the cue file is used in a different application than
+      mp3splt-gtk there is one feature that most probably won't work,
+      though: 
+    </para>
+    <para>      
+      The cue standard does provide commentary fields that allow
+      applications to store private data (which we use for to remember
+      which part of the file is not to be output).
+      But since there is no standartized way to exclude parts of a
+      file from the CD burning process other applications most
+      probably won't know if you want to do so.
+    </para>
+    <para>
+      To export the current split points as a cue file press
+      <menuchoice><guimenu>File</guimenu><guimenuitem>Export
+      Splitpoints</guimenuitem></menuchoice>
+    </para>
+  </sect1>
+  <sect1 id="mp3splt_gtk-Troubleshooting">
+    <title>Troubleshooting</title>
+    <sect2 id="mp3splt_gtk-PlayerWontStart">
+      <title>The player won't start</title>
+      <para>
+	If the player won't start even if the play button is pressed try
+	starting the player independently from mp3splt-gtk and pressing
+	play thereafter.
+      </para>
+      <para>mp3splt-gtk weiß, wie SnackAmp und Audacious ferngesteuert werden, so, dass diese automatisch zu der Datei umschalten können, die geschnitten werden soll.</para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-SplittingDoesntWork">
+      <title>Das Schneiden funktioniert nicht</title>
+      <para>Überprüfen Sie, ob die installierte Version von libmp3splt dieselbe Versionsnummer besitzt, wie mp3splt-gtk. Auch wenn (zumindest bei neueren Programmversionen) das configure-script sicherstellen, dass das Compilieren der falschen Version des Programms nicht möglich ist, gibt es sichereinen Weg, trotzdem falsche Kombinationen von Dateien in einem System zu installieren.</para>
+      <para>
+	If that is the case make sure that in the <guilabel>File
+	mode</guilabel> tab of the <guilabel>Type of split</guilabel>
+	tab <guilabel>Single file</guilabel> mode is selected.
+      </para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-SplittingDoesntWorkII">
+      <title>Splitting a certain Ogg file doesn't work</title>
+      <para>
+	Next to the lossy ogg vorbis format that gives good
+	compression while keeping file sizes extremely low there are
+	other file formats that can be kept inside an ogg container as
+	well, notably ogg flac. 
+      </para>
+      <para>
+	Flac is a completely lossless codec which means that the
+	output files are sonewhat larger than Ogg vorbis ones but
+	these files can be cut on any information without loosing any
+	quality.
+      </para>
+      <para>
+	Since there is no direct need mp3splt-gtk still does not
+	support cutting flac files.
+      </para>
+    </sect2>
+    <sect2 id="mp3splt_gtk-AddingFilesDoesntWork">
+      <title>Adding a file to the files view doesn't work</title>
+      <para>
+	Make sure that in the <guilabel>File mode</guilabel> tab of
+	the <guilabel>Type of split</guilabel> tab
+	<guilabel>Batch processing</guilabel> mode is selected.
+      </para>
+    </sect2>
+  </sect1>
+</article>
