@@ -59,4 +59,3 @@ Depends: libmp3splt (= ${libmp3splt:Version}) | mp3splt (= ${binary:Version})
                                               | mp3splt-gtk (= ${mp3splt-gtk:Version})
 Description: debugging symbols for mp3splt, mp3splt-gtk and libmp3splt
  This package provides the detached debug symbols for mp3splt.
-
