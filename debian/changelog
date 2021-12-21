@@ -1,3 +1,9 @@
+mp3splt (2.6.2+20170630-3.1ubuntu0~ppa1) focal; urgency=medium
+
+  * Backport to Focal
+
+ -- Dominik Stadler (Ubuntu key) <dominik.stadler@gmx.at>  Tue, 21 Dec 2021 08:09:35 +0100
+
 mp3splt (2.6.2+20170630-3.1) unstable; urgency=medium
 
   * Non-maintainer upload.
