@@ -1,1 +1,14 @@
 .pc/
+debian/files
+mp3splt-gtk/.idea/
+mp3splt-gtk/autom4te.cache/
+mp3splt-gtk/build-aux/mkinstalldirs~
+mp3splt-gtk/config.h.in~
+mp3splt-gtk/aclocal.m4
+mp3splt-gtk/config.h.in
+mp3splt-gtk/configure
+mp3splt-gtk/config.log
+mp3splt-gtk/libltdl/
+mp3splt-gtk/m4/*.m4
+mp3splt-gtk/po/Makefile.in.in~
+mp3splt-gtk/po/Makevars.template
